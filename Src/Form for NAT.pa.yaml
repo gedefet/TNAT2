@@ -5372,7 +5372,11 @@ Screens:
                                           )
                                       ).field_5 / 60 / 24) + (HoursArrival.Selected.Value / 24 + MinutesArrival.Selected.Value / 1440) + (5 / 60 / 24)
                                   )),
-                                  'Time in Minutes 1': 0,
+                                'Time in Minutes 1': If(
+                                    IsBlank(TimeInMinutes.Text),
+                                    0,
+                                    Value(TimeInMinutes.Text)
+                                ),
                                   '# Pools': If(
                                       IsBlank(NumPoolsXT.Text),
                                       0,
