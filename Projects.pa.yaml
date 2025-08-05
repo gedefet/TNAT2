@@ -1,0 +1,665 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  Projects:
+    Properties:
+      Fill: =ColorFade(RGBA(0, 51, 131, 1), 80%)
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnVisible: =//Set(RecordProject,[])
+    Children:
+      - Gallery1:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_OneTextVariant_ver5.0
+          Properties:
+            AccessibleLabel: ="Gallery"
+            BorderColor: =
+            Fill: =ColorFade(RGBA(229, 231, 232, 1), 60%)
+            FocusedBorderThickness: =1
+            Height: =400
+            Items: =Sort(Filter(colProjects,'Created By'.Email= User().Email || User().Email in 'Usuarios Compartidos'),Created,SortOrder.Descending)
+            Width: =1231
+            X: =70
+            Y: =312
+          Children:
+            - Title1:
+                Control: Label@2.5.1
+                Properties:
+                  Align: =Align.Center
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(50, 49, 48, 1)
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                  Height: =Self.Size * 1.8
+                  OnSelect: =Select(Parent)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  Text: =ThisItem.Country
+                  VerticalAlign: =VerticalAlign.Top
+                  Width: =320
+                  X: =Label2.X -70
+                  Y: =23
+            - NextArrow1:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  AccessibleLabel: =Self.Tooltip
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(166, 166, 166, 1)
+                  Height: =50
+                  Icon: =Icon.Edit
+                  OnSelect: |
+                    =UpdateContext({varLoadingHome: true});
+                    Concurrent(
+                        ResetForm(Form1),
+                        Set(
+                            RecordProject,
+                            Gallery1.Selected
+                        ),
+                        If(
+                            Gallery1.Selected.'Type of Analysis'.Value = "Standard Grifols solution" || Gallery1.Selected.'Type of Analysis'.Value = "Comparison between Grifols proposals",
+                            Set(
+                                VarActivateAddAssay,
+                                true
+                            ),
+                            Set(
+                                VarActivateAddAssay,
+                                false
+                            )
+                        ),
+                        If(
+                            Gallery1.Selected.'Type of Analysis'.Value = "Workflow simulation in batch mode (this will include STAT donations)",
+                            Set(
+                                VarActivateAddWFS,
+                                true
+                            ),
+                            Set(
+                                VarActivateAddWFS,
+                                false
+                            )
+                        ),
+                        ClearCollect(
+                            TempCollection,
+                            'DX-SALES NAT Workflow Tool | List Scenario'
+                        ),
+                        Set(
+                            RegistroIDgal,
+                            Gallery1.Selected.ID
+                        ),
+                        ClearCollect(
+                            Colect_Ensayos,
+                            Filter(
+                                'DX-SALES NAT Workflow Tool | List Assays',
+                                'Sales ID' = Gallery1.Selected.ID
+                            )
+                        ),
+                        ClearCollect(
+                            Colect_wfs,
+                            Filter(
+                                'DX-SALES NAT Workflow Tool | List Workflow Simulation',
+                                'Sales ID' = Gallery1.Selected.ID && Escenario = "Scenario 0"
+                            )
+                        ),
+                        Set(
+                            VarModeForm,
+                            FormMode.Edit
+                        ),
+                        Set(
+                            flagvisibleNumPanther,
+                            false
+                        ),
+                        Set(
+                            flagvisibleProposal,
+                            false
+                        ),
+                        Set(
+                            flagcreate,
+                            false
+                        )
+                    );
+                    Select(Parent);
+                    Navigate(
+                        'Form for NAT',
+                        Transition.Pop
+                    );
+                    UpdateContext({varLoadingHome: false});
+                  PaddingBottom: =12
+                  PaddingLeft: =12
+                  PaddingRight: =12
+                  PaddingTop: =12
+                  Tooltip: ="Ver los detalles del elemento"
+                  Width: =50
+                  X: =939
+                  Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            - Separator1:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =8
+                  OnSelect: =Select(Parent)
+                  Width: =Parent.TemplateWidth
+                  Y: =Parent.TemplateHeight - Self.Height
+            - Rectangle1:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =RGBA(0, 18, 107, 1)
+                  Height: =Parent.TemplateHeight - Separator1.Height
+                  OnSelect: =Select(Parent)
+                  Visible: =ThisItem.IsSelected
+                  Width: =4
+            - Title1_1:
+                Control: Label@2.5.1
+                Properties:
+                  Align: =Align.Center
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(50, 49, 48, 1)
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                  Height: =Self.Size * 1.8
+                  OnSelect: =Select(Parent)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  Text: =ThisItem.City
+                  VerticalAlign: =VerticalAlign.Top
+                  Width: =200
+                  X: =Label2_1.X -70
+                  Y: =23
+            - Title1_2:
+                Control: Label@2.5.1
+                Properties:
+                  Align: =Align.Center
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(50, 49, 48, 1)
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                  Height: =Self.Size * 1.8
+                  OnSelect: =Select(Parent)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  Text: =
+                  VerticalAlign: =VerticalAlign.Top
+                  Width: =200
+                  X: =Label2_2.X -70
+                  Y: =23
+            - Icon9:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  AccessibleLabel: ="Icono Share"
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(166, 166, 166, 1)
+                  Height: =40
+                  Icon: =Icon.Share
+                  OnSelect: =Select(Parent);Set(popupShareUser,true)
+                  Width: =40
+                  X: =1060
+                  Y: =17
+            - Title1_3:
+                Control: Label@2.5.1
+                Properties:
+                  Align: =Align.Center
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(50, 49, 48, 1)
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                  Height: =Self.Size * 1.8
+                  OnSelect: =Select(Parent)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  Text: =ThisItem.ID
+                  VerticalAlign: =VerticalAlign.Top
+                  Width: =128
+                  X: =Label2_5.X -70
+                  Y: =23
+            - Icon9_1:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  AccessibleLabel: ="Icono Delete"
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(166, 166, 166, 1)
+                  Height: =40
+                  Icon: =Icon.Trash
+                  OnSelect: |-
+                    =Remove(
+                        'DX-SALES NAT Workflow Tool | List Sales',
+                        ThisItem
+                    );
+                    RemoveIf(
+                        'DX-SALES NAT Workflow Tool | List Assays',
+                        'Sales ID' = ThisItem.ID
+                    );
+                    RemoveIf(
+                        'DX-SALES NAT Workflow Tool | List Scenario',
+                        'Sales ID' = ThisItem.ID
+                    );
+                    RemoveIf(
+                        'DX-SALES NAT Workflow Tool | List Workflow Simulation',
+                        'Sales ID' = ThisItem.ID
+                    )
+                  Width: =40
+                  X: =1162
+                  Y: =17
+      - Label1:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =86
+            Size: =30
+            Text: ="Project"
+            Width: =1366
+      - Icon3:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: ="Back"
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Icon: =Icon.BackArrow
+            OnSelect: =Back()
+            X: =29
+            Y: =11
+      - Image3:
+          Control: Image@2.2.3
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Height: =23
+            Image: =barra_grifols
+            ImagePosition: =ImagePosition.Stretch
+            Width: =1365
+            Y: =745
+      - Button1_2:
+          Control: Classic/Button@2.2.0
+          Properties:
+            Align: =Align.Left
+            BorderColor: =ColorFade(Self.Fill, -0%)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =54
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(0, 51, 131, 1), -20%)
+            OnSelect: |-
+              =ResetForm(Form1);
+              Set(
+                  VarActivateAddAssay,
+                  false
+              );
+              Set(
+                  VarActivateAddWFS,
+                  false
+              );
+              Set(
+                  flagcreate,
+                  true
+              );
+              Set(
+                  VarModeForm,
+                  FormMode.New
+              );
+              Clear(Colect_Ensayos);
+              Clear(Colect_wfs);
+              Set(
+                  flagvisibleNumPanther,
+                  false
+              );
+              Set(
+                  flagvisibleProposal,
+                  false
+              );Set(RecordProject,Blank());
+              Navigate(
+                  'Form for NAT',
+                  Transition.Pop
+              )
+            PaddingLeft: =Icon6_1.X - Button1_2.X +Icon6_1.Width + 10
+            PaddingRight: =25
+            PressedBorderColor: =Self.Fill
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Size: =22
+            Text: ="New"
+            Width: =186
+            X: =1105
+            Y: =152
+      - Icon6_1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: ="Icono Add"
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =35
+            Icon: =Icon.Add
+            OnSelect: |-
+              =ResetForm(Form1);
+              Set(
+                  VarActivateAddAssay,
+                  false
+              );
+              Set(
+                  VarActivateAddWFS,
+                  false
+              );
+              Set(
+                  flagcreate,
+                  true
+              );
+              Set(
+                  VarModeForm,
+                  FormMode.New
+              );
+              Clear(Colect_Ensayos);
+              Clear(Colect_wfs);
+              Set(
+                  flagvisibleNumPanther,
+                  false
+              );
+              Set(
+                  flagvisibleProposal,
+                  false
+              );Set(RecordProject,Blank());
+              Navigate(
+                  'Form for NAT',
+                  Transition.Pop
+              )
+            Width: =35
+            X: =1140
+            Y: =165
+      - Label2:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =51
+            Size: =16
+            Text: ="Country"
+            Width: =320
+            X: =Label2_5.X + Label2_5.Width
+            Y: =261
+      - Label2_1:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =51
+            Size: =16
+            Text: ="City"
+            Width: =200
+            X: =Label2.X + Label2.Width
+            Y: =261
+      - Label2_5:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =51
+            Size: =16
+            Text: ="ID"
+            Width: =128
+            X: =70
+            Y: =261
+      - Label2_2:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =51
+            Size: =16
+            Text: =
+            Width: =200
+            X: =Label2_1.X + Label2_1.Width
+            Y: =261
+      - Label2_3:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =51
+            Size: =16
+            Text: =
+            Width: =380
+            X: =Label2_2.X + Label2_2.Width
+            Y: =261
+      - Icon3_1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: ="Back"
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Icon: =Icon.Reload
+            OnSelect: =ClearCollect(colProjects,'DX-SALES NAT Workflow Tool | List Sales');
+            X: =1276
+            Y: =11
+      - Rectangle2_3:
+          Control: Rectangle@2.3.0
+          Group: Group2_1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =768
+            Visible: =popupShareUser
+            Width: =1366
+      - Rectangle2_2:
+          Control: Rectangle@2.3.0
+          Group: Group2_1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =163
+            Visible: =popupShareUser
+            Width: =607
+            X: =387
+            Y: =144
+      - Form2_1:
+          Control: Form@2.4.4
+          Variant: Classic
+          Layout: Vertical
+          Group: Group2_1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            DataSource: ='DX-SALES NAT Workflow Tool | List Sales'
+            DefaultMode: =VarModeFormAssay
+            Height: =170
+            Item: =LookUp('DX-SALES NAT Workflow Tool | List Sales' ,ID=RecordProject.ID)
+            NumberOfColumns: =1
+            OnSuccess: =
+            Visible: =popupShareUser
+            Width: =546
+            X: =415
+            Y: =150
+          Children:
+            - Usuarios Compartidos_DataCard1:
+                Control: TypedDataCard@1.0.7
+                Variant: ClassicTextualEdit
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  DataField: ="Usuarios_x0020_Compartidos"
+                  Default: =ThisItem.'Usuarios Compartidos'
+                  DisplayName: ="Shared Users"
+                  MaxLength: =DataSourceInfo([@'DX-SALES NAT Workflow Tool | List Sales'], DataSourceInfo.MaxLength, 'Usuarios Compartidos')
+                  Required: =false
+                  Update: =DataCardValue66.Text
+                  Width: =546
+                  X: =0
+                  Y: =0
+                Children:
+                  - DataCardKey69:
+                      Control: Label@2.5.1
+                      MetadataKey: FieldName
+                      Properties:
+                        AutoHeight: =true
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        Color: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Height: =34
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                  - DataCardValue66:
+                      Control: Classic/TextInput@2.3.2
+                      MetadataKey: FieldValue
+                      Properties:
+                        AccessibleLabel: ="Text Input"
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Font: =Font.'Open Sans'
+                        HintText: ="Enter the email"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey69.Y + DataCardKey69.Height + 5
+                  - ErrorMessage69:
+                      Control: Label@2.5.1
+                      MetadataKey: ErrorMessage
+                      Properties:
+                        AutoHeight: =true
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        Color: =RGBA(168, 0, 0, 1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =14
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue66.Y + DataCardValue66.Height
+                  - StarVisible69:
+                      Control: Label@2.5.1
+                      MetadataKey: FieldRequired
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        Color: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Height: =DataCardKey69.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey69.Y
+      - Button5_3:
+          Control: Classic/Button@2.2.0
+          Group: Group2_1
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            OnSelect: =UpdateIf('DX-SALES NAT Workflow Tool | List Sales' ,ID=RecordProject.ID,{'Usuarios Compartidos':DataCardValue66.Text});Set(popupShareUser,false)
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            Text: ="Save"
+            Visible: =popupShareUser
+            X: =741
+            Y: =343
+      - Button5_2:
+          Control: Classic/Button@2.2.0
+          Group: Group2_1
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            OnSelect: =Set(popupShareUser,false)
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            Text: ="Cancel"
+            Visible: =popupShareUser
+            X: =465
+            Y: =343
+      - Rectangle5_3:
+          Control: Rectangle@2.3.0
+          Group: Group1_3
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(241, 242, 243, 1)
+            Height: =768
+            Visible: =varLoadingHome
+            Width: =1366
+      - Image2_3:
+          Control: Image@2.2.3
+          Group: Group1_3
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Height: =228
+            Image: ='Spin-1s-200px'
+            Visible: =varLoadingHome
+            Width: =282
+            X: =542
+            Y: =231

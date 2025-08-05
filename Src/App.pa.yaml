@@ -1,0 +1,22 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+App:
+  Properties:
+    OnStart: |+
+      =Set(varRol, LookUp('DX-SALES NAT Workflow Tool | List Roles' ,MailUser=User().Email).Rol.Value);Set(varRolBool, If(varRol="Administrador",true,false));
+      Set(URLPowerBI,'DX-SALESNATWorkflowTool|URLPowerBI'.Run());
+
+      ClearCollect(PoolerxNumSearchH,LookUp('DX-SALES NAT Workflow Tool | List Poolers',ID=1),LookUp('DX-SALES NAT Workflow Tool | List Poolers',ID=12));
+      ClearCollect(PantherxNumSearchH,LookUp('DX-SALES NAT Workflow Tool | List Panthers' ,ID=1),LookUp('DX-SALES NAT Workflow Tool | List Panthers' ,ID=12));
+      Concurrent(ClearCollect(PoolerxNumSearchV, {Value1: First(PoolerxNumSearchH).Value1,Value2:Last(PoolerxNumSearchH).Value1},{Value1: First(PoolerxNumSearchH).Value2,Value2:Last(PoolerxNumSearchH).Value2},{Value1: First(PoolerxNumSearchH).Value3,Value2:Last(PoolerxNumSearchH).Value3},{Value1: First(PoolerxNumSearchH).Value4,Value2:Last(PoolerxNumSearchH).Value4},{Value1: First(PoolerxNumSearchH).Value5,Value2:Last(PoolerxNumSearchH).Value5},{Value1: First(PoolerxNumSearchH).Value6,Value2:Last(PoolerxNumSearchH).Value6},{Value1: First(PoolerxNumSearchH).Value7,Value2:Last(PoolerxNumSearchH).Value7},{Value1: First(PoolerxNumSearchH).Value8,Value2:Last(PoolerxNumSearchH).Value8},{Value1: First(PoolerxNumSearchH).Value9,Value2:Last(PoolerxNumSearchH).Value9},{Value1: First(PoolerxNumSearchH).Value10,Value2:Last(PoolerxNumSearchH).Value10},{Value1: First(PoolerxNumSearchH).Value11,Value2:Last(PoolerxNumSearchH).Value11},{Value1: First(PoolerxNumSearchH).Value12,Value2:Last(PoolerxNumSearchH).Value12},{Value1: First(PoolerxNumSearchH).Value13,Value2:Last(PoolerxNumSearchH).Value13},{Value1: First(PoolerxNumSearchH).Value14,Value2:Last(PoolerxNumSearchH).Value14}),
+
+      ClearCollect(PantherxNumSearchV, {Value1: First(PantherxNumSearchH).Value1,Value2:Last(PantherxNumSearchH).Value1},{Value1: First(PantherxNumSearchH).Value2,Value2:Last(PantherxNumSearchH).Value2},{Value1: First(PantherxNumSearchH).Value3,Value2:Last(PantherxNumSearchH).Value3},{Value1: First(PantherxNumSearchH).Value4,Value2:Last(PantherxNumSearchH).Value4},{Value1: First(PantherxNumSearchH).Value5,Value2:Last(PantherxNumSearchH).Value5},{Value1: First(PantherxNumSearchH).Value6,Value2:Last(PantherxNumSearchH).Value6},{Value1: First(PantherxNumSearchH).Value7,Value2:Last(PantherxNumSearchH).Value7},{Value1: First(PantherxNumSearchH).Value8,Value2:Last(PantherxNumSearchH).Value8},{Value1: First(PantherxNumSearchH).Value9,Value2:Last(PantherxNumSearchH).Value9},{Value1: First(PantherxNumSearchH).Value10,Value2:Last(PantherxNumSearchH).Value10},{Value1: First(PantherxNumSearchH).Value11,Value2:Last(PantherxNumSearchH).Value11},{Value1: First(PantherxNumSearchH).Value12,Value2:Last(PantherxNumSearchH).Value12},{Value1: First(PantherxNumSearchH).Value13,Value2:Last(PantherxNumSearchH).Value13},{Value1: First(PantherxNumSearchH).Value14,Value2:Last(PantherxNumSearchH).Value14}),
+
+      ClearCollect(BO_instruments,ShowColumns('DX-SALES NAT Workflow Tool | List Xpress Troughput' , 'Helper Column', 'Samples in run','Time in minutres ( 4 minutes between run)')))
+    Theme: =PowerAppsTheme

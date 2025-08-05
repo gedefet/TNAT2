@@ -1,0 +1,76 @@
+{
+  "Resources": [
+    {
+      "Name": "SampleImage",
+      "Schema": "i",
+      "IsSampleData": true,
+      "IsWritable": false,
+      "Type": "ResourceInfo",
+      "FileName": "/ctrllib/image/images/SampleImage.svg",
+      "Path": "/ctrllib/image/images/SampleImage.svg",
+      "Content": "Image",
+      "ResourceKind": "Uri",
+      "RootPath": "ms-appx:///ctrllib/image/images/SampleImage.svg"
+    },
+    {
+      "Name": "Start_Screen",
+      "Schema": "i",
+      "IsSampleData": false,
+      "IsWritable": false,
+      "Type": "ResourceInfo",
+      "FileName": "e3674948-e7a3-42c9-b630-f20941d74fa5.jpg",
+      "Path": "Assets\\Images\\e3674948-e7a3-42c9-b630-f20941d74fa5.jpg",
+      "Content": "Image",
+      "ResourceKind": "LocalFile",
+      "RootPath": "https://dsprdil110weu.blob.core.windows.net/7b5c0b5e-0029-472b-82fc-06783ae1e413-1/resource/ZTM2NzQ5NDgtZTdhMy00MmM5LWI2MzAtZjIwOTQxZDc0ZmE1.jpg?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2025-08-05T14%3A48%3A48Z&ske=2025-08-06T15%3A03%3A48Z&sks=b&skv=2023-01-03&sv=2023-01-03&spr=https&se=2025-08-06T15%3A03%3A48Z&sr=b&sp=r&sig=Lsx8HTUpR7mWD7STOqcCBm0upny94xxlV%2BoHtAlJOmc%3D"
+    },
+    {
+      "Name": "grifols logo",
+      "Schema": "i",
+      "IsSampleData": false,
+      "IsWritable": false,
+      "Type": "ResourceInfo",
+      "FileName": "719d9ec1-75e7-4e98-ab9c-2eb59b653b05.jpg",
+      "Path": "Assets\\Images\\719d9ec1-75e7-4e98-ab9c-2eb59b653b05.jpg",
+      "Content": "Image",
+      "ResourceKind": "LocalFile",
+      "RootPath": "https://dsprdil110weu.blob.core.windows.net/7b5c0b5e-0029-472b-82fc-06783ae1e413-1/resource/NzE5ZDllYzEtNzVlNy00ZTk4LWFiOWMtMmViNTliNjUzYjA1.jpg?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2025-08-05T14%3A48%3A48Z&ske=2025-08-06T15%3A03%3A48Z&sks=b&skv=2023-01-03&sv=2023-01-03&spr=https&se=2025-08-06T15%3A03%3A48Z&sr=b&sp=r&sig=TopkAddNr%2FF1ZFnqkWms9LTzRzVNB0I8MOnKE1Y6f6U%3D"
+    },
+    {
+      "Name": "barra_grifols",
+      "Schema": "i",
+      "IsSampleData": false,
+      "IsWritable": false,
+      "Type": "ResourceInfo",
+      "FileName": "1b5340e8-ae15-4d65-ac85-8b8251b26355.png",
+      "Path": "Assets\\Images\\1b5340e8-ae15-4d65-ac85-8b8251b26355.png",
+      "Content": "Image",
+      "ResourceKind": "LocalFile",
+      "RootPath": "https://dsprdil110weu.blob.core.windows.net/7b5c0b5e-0029-472b-82fc-06783ae1e413-1/resource/MWI1MzQwZTgtYWUxNS00ZDY1LWFjODUtOGI4MjUxYjI2MzU1.png?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2025-08-05T14%3A48%3A48Z&ske=2025-08-06T15%3A03%3A48Z&sks=b&skv=2023-01-03&sv=2023-01-03&spr=https&se=2025-08-06T15%3A03%3A48Z&sr=b&sp=r&sig=c3FqDcSL3fTf6B0t05tpue0vc5WvhPf6xqoO4mn%2Bz4A%3D"
+    },
+    {
+      "Name": "Spin-1s-200px",
+      "Schema": "i",
+      "IsSampleData": false,
+      "IsWritable": false,
+      "Type": "ResourceInfo",
+      "FileName": "0a2da1d4-ee90-4e1f-918f-f61cc4c499ca.gif",
+      "Path": "Assets\\Images\\0a2da1d4-ee90-4e1f-918f-f61cc4c499ca.gif",
+      "Content": "Image",
+      "ResourceKind": "LocalFile",
+      "RootPath": "https://dsprdil110weu.blob.core.windows.net/7b5c0b5e-0029-472b-82fc-06783ae1e413-1/resource/MGEyZGExZDQtZWU5MC00ZTFmLTkxOGYtZjYxY2M0YzQ5OWNh.gif?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2025-08-05T14%3A48%3A48Z&ske=2025-08-06T15%3A03%3A48Z&sks=b&skv=2023-01-03&sv=2023-01-03&spr=https&se=2025-08-06T15%3A03%3A48Z&sr=b&sp=r&sig=PTQmQdvXJEMKljtnsAUGcfN3LI3ZQ8I9FOTUsPGzA%2BA%3D"
+    },
+    {
+      "Name": "Imagen1",
+      "Schema": "i",
+      "IsSampleData": false,
+      "IsWritable": false,
+      "Type": "ResourceInfo",
+      "FileName": "e4d9f3cc-ebea-40a4-bbe7-24e36fad2b1d.png",
+      "Path": "Assets\\Images\\e4d9f3cc-ebea-40a4-bbe7-24e36fad2b1d.png",
+      "Content": "Image",
+      "ResourceKind": "LocalFile",
+      "RootPath": "https://dsprdil110weu.blob.core.windows.net/7b5c0b5e-0029-472b-82fc-06783ae1e413-1/resource/ZTRkOWYzY2MtZWJlYS00MGE0LWJiZTctMjRlMzZmYWQyYjFk.png?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2025-08-05T14%3A48%3A48Z&ske=2025-08-06T15%3A03%3A48Z&sks=b&skv=2023-01-03&sv=2023-01-03&spr=https&se=2025-08-06T15%3A03%3A48Z&sr=b&sp=r&sig=nOr1xSkOrFv6rKZWKX6PYgYMezvw366JCYlgf7gN%2Bwo%3D"
+    }
+  ]
+}
