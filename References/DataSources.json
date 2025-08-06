@@ -279,6 +279,7 @@
         "{HasAttachments}": "Has attachments",
         "{VersionNumber}": "Version number",
         "GrifolsPoolerInstrument": "Grifols Pooler Instrument",
+        "SamplesalreadyPooled": "Samples already Pooled?",
         "Set_x0020_Size": "Set Size",
         "{Identifier}": "Identifier",
         "FinalPoolsizeperassay_Num": "Final Pool size per assay Num",
